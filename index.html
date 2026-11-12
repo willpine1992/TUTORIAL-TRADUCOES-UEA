@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guia de Traduções PROPESP</title>
+<meta name="description" content="Tutorial em formato de revista para a equipe PROPESP: como traduzir as páginas do site para inglês e espanhol no WPML, da tarefa à publicação.">
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+:root{
+  --verde-900:#0a3326; --verde-800:#0d4a36; --verde-700:#13664a; --verde-600:#17855f;
+  --verde-200:#cfeadd; --verde-100:#e7f5ee; --verde-50:#f4faf7;
+  --ambar:#e9a400; --ambar-100:#fff4d6; --coral:#d9534f; --coral-100:#fde9e8;
+  --azul:#2b6fd6; --azul-100:#e6effc;
+  --tinta:#13221c; --tinta-2:#3c4d46; --tinta-3:#6b7a74; --linha:#d7e6df;
+  --papel:#ffffff; --fundo:#f3f6f4;
+  --serif:'Fraunces', Georgia, 'Times New Roman', serif;
+  --sans:'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --mono:'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --raio:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:78px}
+body{margin:0;background:var(--fundo);color:var(--tinta);font-family:var(--sans);font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:var(--verde-700)}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--verde-900);line-height:1.12;margin:0 0 .5em}
+h2{font-size:clamp(2rem,4.4vw,3.1rem);font-weight:700;letter-spacing:-.01em}
+h3{font-size:1.55rem;font-weight:650;margin-top:1.6em}
+h4{font-size:1.15rem;font-weight:650;margin-top:1.2em}
+p{margin:0 0 1em}
+strong{color:var(--verde-900)}
+code,.mono{font-family:var(--mono);font-size:.86em}
+
+/* ---------- barra superior (web) ---------- */
+.topo{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha)}
+.topo__in{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:10px 16px}
+.topo__marca{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--verde-900);font-weight:700;font-size:.92rem;white-space:nowrap}
+.topo__marca img{height:30px;width:auto}
+.topo__nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+.topo__nav::-webkit-scrollbar{display:none}
+.topo__nav a{flex:none;text-decoration:none;color:var(--tinta-2);font-size:.82rem;font-weight:600;padding:7px 11px;border-radius:999px;white-space:nowrap}
+.topo__nav a:hover{background:var(--verde-100)}
+.topo__nav a.ativo{background:var(--verde-800);color:#fff}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-family:var(--sans);font-weight:700;font-size:.88rem;border-radius:999px;padding:10px 18px;border:1.5px solid var(--verde-800);background:var(--verde-800);color:#fff;cursor:pointer;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px);background:var(--verde-700)}
+.btn--claro{background:#fff;color:var(--verde-800)}
+.btn--claro:hover{background:var(--verde-100)}
+.btn--pq{padding:7px 13px;font-size:.8rem}
+.progresso{position:absolute;left:0;bottom:-1px;height:3px;background:var(--ambar);width:0}
+
+/* ---------- capa ---------- */
+.capa{position:relative;min-height:100vh;color:#fff;background:
+  radial-gradient(1200px 600px at 85% -10%,rgba(233,164,0,.28),transparent 60%),
+  linear-gradient(160deg,var(--verde-900) 0%,var(--verde-800) 55%,#0f5a41 100%);overflow:hidden;display:flex;flex-direction:column}
+.capa__grade{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(180deg,#000 30%,transparent)}
+.capa__in{position:relative;max-width:1180px;margin:0 auto;padding:44px 16px 40px;flex:1;display:flex;flex-direction:column;width:100%}
+.capa__cab{display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;opacity:.9}
+.capa__cab img{height:46px;filter:brightness(0) invert(1)}
+.capa__ed{border:1px solid rgba(255,255,255,.4);padding:6px 12px;border-radius:999px}
+.capa__titulo{margin-top:auto;padding-top:56px}
+.capa__kicker{font-family:var(--sans);font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--ambar);font-size:.85rem;margin-bottom:18px}
+.capa h1{color:#fff;font-size:clamp(2.9rem,8.5vw,6.6rem);font-weight:800;letter-spacing:-.025em;line-height:.95;margin:0 0 22px;max-width:12ch}
+.capa h1 em{font-style:italic;font-weight:400;color:#bfe9d4}
+.capa__sub{font-size:clamp(1.05rem,2vw,1.35rem);max-width:46ch;opacity:.92;margin-bottom:30px}
+.capa__fig{position:relative;margin:8px 0 26px;border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.25);max-width:880px;transform:rotate(-1.2deg)}
+.capa__chamadas{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;border-top:1px solid rgba(255,255,255,.25);padding-top:18px;margin-top:18px}
+.capa__chamadas div{font-size:.86rem;opacity:.95}
+.capa__chamadas b{display:block;font-family:var(--serif);font-size:1.5rem;color:var(--ambar);font-weight:700}
+.capa__acoes{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:8px}
+.capa .btn{background:var(--ambar);border-color:var(--ambar);color:var(--verde-900)}
+.capa .btn--claro{background:transparent;color:#fff;border-color:rgba(255,255,255,.6)}
+
+/* ---------- miolo ---------- */
+.folha{max-width:1180px;margin:0 auto;padding:0 16px}
+.cap{background:var(--papel);border-radius:22px;margin:28px 0;padding:56px clamp(18px,5vw,64px);box-shadow:0 1px 0 var(--linha),0 18px 50px rgba(10,51,38,.06)}
+.cap__abre{display:grid;grid-template-columns:auto 1fr;gap:10px 28px;align-items:end;border-bottom:3px solid var(--verde-900);padding-bottom:22px;margin-bottom:30px}
+.cap__num{font-family:var(--serif);font-size:clamp(4.5rem,11vw,8rem);font-weight:800;line-height:.8;color:var(--verde-200);grid-row:span 2}
+.cap__rotulo{font-weight:800;letter-spacing:.2em;text-transform:uppercase;font-size:.78rem;color:var(--verde-600)}
+.cap__abre h2{margin:0}
+.cap__lead{font-family:var(--serif);font-size:1.32rem;line-height:1.45;color:var(--tinta-2);max-width:62ch;margin-bottom:28px}
+.cap__lead::first-letter{font-size:3.4em;float:left;line-height:.82;padding:6px 10px 0 0;color:var(--verde-700);font-weight:800}
+.duas{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.tres{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.cols-texto{column-count:2;column-gap:36px}
+.cols-texto p{break-inside:avoid}
+
+/* links para painel */
+.abrir{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:var(--verde-50);border:1px solid var(--linha);border-radius:var(--raio);padding:14px 16px;margin:0 0 28px}
+.abrir span{font-size:.86rem;color:var(--tinta-3);margin-right:auto}
+.abrir .url{display:none}
+
+/* prints */
+.shot{margin:26px 0 30px}
+.shot__moldura{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--linha);box-shadow:0 14px 40px rgba(10,51,38,.12);background:#fff;cursor:zoom-in}
+.shot__barra{height:26px;background:#eef3f1;border-bottom:1px solid var(--linha);display:flex;align-items:center;gap:6px;padding:0 10px}
+.shot__barra i{width:9px;height:9px;border-radius:50%;background:#cdd8d3}
+.shot__barra small{margin-left:10px;font-family:var(--mono);font-size:.68rem;color:var(--tinta-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shot__img{position:relative}
+.pin{position:absolute;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;background:var(--ambar);color:var(--verde-900);font:800 .82rem/28px var(--sans);text-align:center;border:2.5px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,.35);z-index:2}
+.pin::after{content:"";position:absolute;inset:-7px;border-radius:50%;border:2px solid var(--ambar);opacity:.0;animation:pulso 2.4s infinite}
+@keyframes pulso{0%{opacity:.7;transform:scale(.7)}100%{opacity:0;transform:scale(1.5)}}
+.shot figcaption{font-size:.86rem;color:var(--tinta-3);margin-top:10px;padding-left:12px;border-left:3px solid var(--verde-200)}
+.shot figcaption b{color:var(--verde-800)}
+.legenda{list-style:none;padding:0;margin:14px 0 0;display:grid;grid-template-columns:repeat(2,1fr);gap:8px 22px;counter-reset:l}
+.legenda li{display:grid;grid-template-columns:28px 1fr;gap:10px;font-size:.93rem;line-height:1.45;align-items:start}
+.legenda li::before{content:attr(data-n);width:24px;height:24px;border-radius:50%;background:var(--ambar);color:var(--verde-900);font:800 .75rem/24px var(--sans);text-align:center;margin-top:1px}
+
+/* passos */
+.passos{list-style:none;margin:20px 0 26px;padding:0;counter-reset:p}
+.passos>li{counter-increment:p;position:relative;padding:4px 0 18px 64px;border-left:2px dashed var(--verde-200);margin-left:22px}
+.passos>li:last-child{border-left-color:transparent}
+.passos>li::before{content:counter(p);position:absolute;left:-23px;top:0;width:44px;height:44px;border-radius:12px;background:var(--verde-800);color:#fff;font:800 1.1rem/44px var(--serif);text-align:center}
+.passos>li>b{display:block;font-size:1.04rem;color:var(--verde-900);margin-bottom:2px}
+.passos .marcar{float:right;margin-left:12px;display:inline-flex;align-items:center;gap:6px;font-size:.75rem;color:var(--tinta-3);cursor:pointer;user-select:none}
+.passos .marcar input{accent-color:var(--verde-700);width:16px;height:16px}
+.passos>li.feito>b:first-child{text-decoration:line-through;text-decoration-color:var(--verde-600)}
+.passos>li.feito::before{background:var(--verde-600);content:"✓"}
+
+/* caixas */
+.box{border-radius:var(--raio);padding:18px 20px;margin:22px 0;border:1px solid}
+.box h4{margin:0 0 6px;font-family:var(--sans);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase}
+.box p:last-child,.box ul:last-child{margin-bottom:0}
+.box--dica{background:var(--ambar-100);border-color:#f2d58a}
+.box--dica h4{color:#8a5d00}
+.box--atencao{background:var(--coral-100);border-color:#f3c1bf}
+.box--atencao h4{color:#a12f2b}
+.box--info{background:var(--azul-100);border-color:#c3d6f4}
+.box--info h4{color:#1d4f9c}
+.box--verde{background:var(--verde-50);border-color:var(--linha)}
+.box--verde h4{color:var(--verde-700)}
+.box ul{margin:6px 0 0;padding-left:20px}
+.box li{margin-bottom:4px}
+
+/* destaque "como ler" */
+.comoler{background:var(--verde-900);color:#e8f4ee;border-radius:18px;padding:30px clamp(18px,4vw,40px);margin:26px 0 34px;position:relative;overflow:hidden}
+.comoler::before{content:"?";position:absolute;right:-10px;top:-60px;font:800 16rem/1 var(--serif);color:rgba(255,255,255,.05)}
+.comoler h3{color:#fff;margin-top:0}
+.comoler dl{display:grid;grid-template-columns:200px 1fr;gap:12px 22px;margin:18px 0 0}
+.comoler dt{font-weight:800;color:var(--ambar);font-size:.92rem}
+.comoler dd{margin:0;font-size:.95rem;line-height:1.55}
+.comoler strong{color:#fff}
+
+/* perguntas */
+.perguntas{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:18px 0 26px;padding:0;list-style:none;counter-reset:q}
+.perguntas li{counter-increment:q;background:var(--verde-50);border:1px solid var(--linha);border-radius:12px;padding:14px 16px 14px 54px;position:relative;font-weight:600;color:var(--verde-900);font-size:.95rem;line-height:1.4}
+.perguntas li::before{content:counter(q);position:absolute;left:14px;top:12px;font:800 1.6rem/1 var(--serif);color:var(--verde-600)}
+.perguntas li small{display:block;font-weight:400;color:var(--tinta-3);font-size:.82rem;margin-top:4px}
+
+/* tabelas */
+.tabela{overflow-x:auto;margin:16px 0 24px}
+.tabela table{margin:0;min-width:560px}
+table{width:100%;border-collapse:collapse;font-size:.92rem;margin:16px 0 24px}
+th{text-align:left;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--verde-700);border-bottom:2px solid var(--verde-900);padding:9px 10px}
+td{border-bottom:1px solid var(--linha);padding:10px;vertical-align:top}
+tbody tr:hover{background:var(--verde-50)}
+
+/* mapa de navegação */
+.mapa{display:grid;grid-template-columns:1fr auto 1fr auto 1.3fr;gap:12px;align-items:center;margin:22px 0 30px}
+.no{background:#fff;border:1.5px solid var(--verde-200);border-radius:14px;padding:14px 16px;font-size:.88rem;line-height:1.35}
+.no b{display:block;font-family:var(--serif);font-size:1.08rem;color:var(--verde-900);margin-bottom:2px}
+.no--escuro{background:var(--verde-800);border-color:var(--verde-800);color:#dff1e8}
+.no--escuro b{color:#fff}
+.seta{font-size:1.6rem;color:var(--verde-600);text-align:center}
+.pilha{display:grid;gap:8px}
+
+/* cards de uso */
+.uso{background:#fff;border:1px solid var(--linha);border-radius:16px;padding:22px;position:relative;break-inside:avoid}
+.uso__tag{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;background:var(--verde-100);color:var(--verde-700);padding:4px 9px;border-radius:999px;margin-bottom:10px}
+.uso h4{margin:0 0 8px;font-size:1.18rem}
+.uso p{font-size:.93rem;margin-bottom:.6em}
+.uso .onde{font-size:.8rem;color:var(--tinta-3);border-top:1px dashed var(--linha);padding-top:8px;margin-top:10px}
+.receita{border-left:4px solid var(--ambar);background:#fffdf6;padding:18px 22px;border-radius:0 14px 14px 0;margin:18px 0}
+.receita h4{margin-top:0}
+.receita ol{margin:0;padding-left:20px}
+.receita .tempo{float:right;font-size:.75rem;font-weight:800;background:var(--ambar);color:var(--verde-900);padding:3px 10px;border-radius:999px}
+
+/* sumário */
+.sumario{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin:24px 0 8px}
+.sumario a{display:grid;grid-template-columns:52px 1fr;gap:6px 12px;text-decoration:none;color:var(--tinta);background:var(--verde-50);border:1px solid var(--linha);border-radius:14px;padding:16px;transition:transform .15s,border-color .15s}
+.sumario a:hover{transform:translateY(-2px);border-color:var(--verde-600)}
+.sumario .n{font:800 2.1rem/1 var(--serif);color:var(--verde-600);grid-row:span 2}
+.sumario b{font-family:var(--serif);font-size:1.08rem;color:var(--verde-900);line-height:1.2}
+.sumario small{color:var(--tinta-3);font-size:.82rem;line-height:1.35}
+
+/* glossário */
+.glossario{column-count:2;column-gap:36px;margin:0}
+.glossario dt{font-weight:800;color:var(--verde-800);margin-top:12px;break-after:avoid}
+.glossario dd{break-inside:avoid}
+.glossario dd{margin:2px 0 0;font-size:.93rem;color:var(--tinta-2)}
+details.faq{border:1px solid var(--linha);border-radius:12px;padding:0 18px;margin:10px 0;background:#fff}
+details.faq summary{cursor:pointer;font-weight:700;color:var(--verde-900);padding:14px 0;list-style:none}
+details.faq summary::before{content:"+";display:inline-block;width:22px;color:var(--verde-600);font-weight:800}
+details.faq[open] summary::before{content:"–"}
+details.faq p{font-size:.94rem}
+
+/* rodapé */
+.contra{background:var(--verde-900);color:#cfe7dc;border-radius:22px;margin:28px 0 40px;padding:48px clamp(18px,5vw,64px)}
+.contra h2{color:#fff}
+.contra a{color:var(--ambar)}
+.contra .links{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin:22px 0}
+.contra .links a{display:block;text-decoration:none;border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:12px 14px;color:#fff;font-weight:600;font-size:.92rem}
+.contra .links a small{display:block;color:#9fc9b6;font-weight:400;font-family:var(--mono);font-size:.68rem;word-break:break-all;margin-top:3px}
+.contra .links a:hover{background:rgba(255,255,255,.07)}
+.assinatura{font-size:.85rem;border-top:1px solid rgba(255,255,255,.2);padding-top:16px;margin-top:22px}
+.rodape-pdf{display:none}
+.baixar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:16px 18px;margin:8px 0 6px}
+.baixar b{display:block;color:#fff;font-family:var(--serif);font-size:1.15rem}
+.baixar span{font-size:.88rem}
+.contra .baixar .btn{background:var(--ambar);border-color:var(--ambar);color:var(--verde-900)}
+.fab-pdf{position:fixed;right:18px;bottom:74px;z-index:40;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+@media print{.fab-pdf{display:none!important}}
+
+/* lightbox */
+.lb{position:fixed;inset:0;background:rgba(6,25,19,.92);z-index:100;display:none;align-items:center;justify-content:center;padding:20px;cursor:zoom-out}
+.lb.aberto{display:flex}
+.lb img{max-width:100%;max-height:100%;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.lb__x{position:absolute;top:14px;right:18px;color:#fff;font-size:2rem;background:none;border:0;cursor:pointer}
+.subir{position:fixed;right:18px;bottom:18px;z-index:40;width:46px;height:46px;border-radius:50%;border:0;background:var(--verde-800);color:#fff;font-size:1.2rem;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:opacity .2s}
+.subir.on{opacity:1;pointer-events:auto}
+.copiar{background:none;border:0;color:var(--verde-600);cursor:pointer;font-size:.8rem;font-weight:700;padding:4px 8px;border-radius:8px;vertical-align:middle}
+.copiar:hover{background:var(--verde-100)}
+
+@media screen and (max-width:820px){
+  body{font-size:16px}
+  .duas,.tres,.legenda{grid-template-columns:1fr}
+  .glossario{column-count:1}
+  .cols-texto{column-count:1}
+  .capa__chamadas{grid-template-columns:repeat(2,1fr)}
+  .mapa{grid-template-columns:1fr}
+  .seta{transform:rotate(90deg)}
+  .comoler dl{grid-template-columns:1fr;gap:4px}
+  .comoler dd{margin-bottom:10px}
+  .topo__marca span{display:none}
+  .cap{padding:36px 18px;border-radius:16px}
+  .pin{width:22px;height:22px;font-size:.7rem;line-height:22px;border-width:2px}
+  .passos>li{padding-left:44px;margin-left:18px}
+  .passos>li::before{width:36px;height:36px;line-height:36px;left:-19px;font-size:1rem}
+  .passos .marcar{float:none;display:flex;margin:6px 0 0}
+  .topo .btn span{display:none}
+  .capa__cab{flex-wrap:wrap}
+  .capa__ed{font-size:.66rem;letter-spacing:.12em}
+  .capa__kicker{letter-spacing:.12em;font-size:.74rem}
+  .capa__fig{transform:none}
+  .capa{min-height:auto}
+  .capa__titulo{padding-top:36px}
+}
+
+/* ================= IMPRESSÃO / PDF ================= */
+@page{size:A4;margin:14mm 14mm 16mm}
+@page capa{margin:0}
+@media print{
+  html{scroll-behavior:auto}
+  body{background:#fff;font-size:10.2pt;line-height:1.5}
+  .topo,.subir,.lb,.capa__acoes,.copiar,.passos .marcar,.so-web{display:none!important}
+  .abrir{display:block;background:none;border:0;border-left:3px solid var(--verde-600);border-radius:0;padding:2px 0 2px 12px;margin:0 0 14px}
+  .abrir .btn,.abrir span{display:none}
+  .tabela{overflow:visible}
+  .tabela table{min-width:0}
+  .abrir .url{display:block;font-family:var(--mono);font-size:7.6pt;color:var(--verde-700)}
+  .capa{page:capa;min-height:297mm;height:297mm;width:210mm;break-after:page;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .capa__in{padding:20mm 16mm 16mm}
+  .capa h1{font-size:62pt}
+  .capa__sub{font-size:14pt}
+  .capa__fig{max-width:150mm;margin:4mm 0 8mm}
+  .capa__fig img{max-height:105mm;width:100%;object-fit:cover;object-position:top}
+  .capa__titulo{padding-top:10mm}
+  .glossario dt{break-after:avoid}
+  .glossario dd{break-inside:avoid}
+  .mapa{break-inside:avoid}
+  .duas .shot__img img{max-height:100mm}
+  .folha{max-width:none;padding:0}
+  .cap{box-shadow:none;border-radius:0;margin:0;padding:0;break-before:page}
+  .cap__abre{margin-bottom:16px;padding-bottom:12px}
+  .cap__num{font-size:62pt}
+  h2{font-size:25pt}
+  h3{font-size:14.5pt;break-after:avoid;margin-top:1.2em}
+  h4{break-after:avoid}
+  .cap__lead{font-size:12.5pt;margin-bottom:14px}
+  .shot{break-inside:avoid;margin:12px 0 14px}
+  .shot__moldura{box-shadow:none;cursor:default}
+  .shot__img img{max-height:118mm;width:auto;margin:0 auto}
+  .shot--alta .shot__img img{max-height:150mm}
+  .shot__img{width:fit-content;margin:0 auto}
+  .pin{width:20px;height:20px;font-size:7.5pt;line-height:16px;border-width:2px}
+  .pin::after{display:none}
+  .legenda{gap:4px 16px}
+  .legenda li{font-size:8.8pt;grid-template-columns:22px 1fr;gap:6px}
+  .legenda li::before{width:18px;height:18px;line-height:18px;font-size:7pt}
+  .box,.receita,.uso,.comoler,.no,table,.passos>li,.perguntas li{break-inside:avoid}
+  .box,.receita,.uso,.comoler,.no,.pin,.legenda li::before,.passos>li::before,.sumario a,.perguntas li,.contra,th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .passos>li{padding-bottom:10px;padding-left:52px}
+  .passos>li::before{width:34px;height:34px;line-height:34px;left:-18px;font-size:12pt}
+  .comoler{padding:18px 22px}
+  .comoler dl{grid-template-columns:120px 1fr;gap:6px 14px}
+  .comoler dd,.comoler dt{font-size:8.8pt}
+  .tres{gap:10px}
+  .uso{padding:14px}
+  .uso p{font-size:9pt}
+  .contra{border-radius:0;margin:0;break-before:page;min-height:265mm}
+  .contra .links a small{font-size:6.6pt}
+  details.faq{break-inside:avoid}
+  details.faq>*:not(summary){display:block}
+  .sumario a{padding:10px}
+  a{text-decoration:none}
+  .so-pdf{display:block!important}
+}
+.so-pdf{display:none}
+/* texto justificado */
+p,li,dd,figcaption,.cap__lead{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyphens:auto}
+.sumario li,.links li,.topo__nav li,.pilha li,.capa p,.contra p,.uso__tag,.btn,.pin{text-align:left;-webkit-hyphens:manual;hyphens:manual}
+</style>
+</head>
+<body>
+<header class="topo" id="topo">
+  <div class="topo__in">
+    <a class="topo__marca" href="#capa"><img src="img/propespuea.svg" alt="PROPESP · UEA"><span>Guia de Traduções</span></a>
+    <nav class="topo__nav" id="nav">
+      <a href="#sumario">Sumário</a>
+      <a href="#conceitos">1 · Conceitos</a>
+      <a href="#tarefa">2 · Tarefa</a>
+      <a href="#editor">3 · Editor</a>
+      <a href="#revisar">4 · Revisar</a>
+      <a href="#publicar">5 · Publicar</a>
+      <a href="#padroes">6 · Padrões</a>
+      <a href="#duvidas">7 · Dúvidas</a>
+    </nav>
+    <a class="btn btn--pq" href="Tutorial_Traducoes_Site_PROPESP_UEA.pdf" download>⬇ <span>Baixar PDF</span></a>
+  </div>
+  <div class="progresso" id="progresso"></div>
+</header>
+
+<!-- ======================= CAPA ======================= -->
+<section class="capa" id="capa">
+  <div class="capa__grade"></div>
+  <div class="capa__in">
+    <div class="capa__cab">
+      <img src="img/propespuea.svg" alt="PROPESP · UEA">
+      <span class="capa__ed">Edição nº 4 · Novembro 2026</span>
+    </div>
+    <div class="capa__titulo">
+      <div class="capa__kicker">Guia prático para a equipe PROPESP</div>
+      <h1>O site <em>em três</em> idiomas</h1>
+      <p class="capa__sub">Como traduzir as páginas do site da PROPESP para inglês e espanhol no WPML: da lista de tarefas à página publicada, com um exemplo real passo a passo.</p>
+      <div class="capa__acoes">
+        <a class="btn" href="#sumario">Começar a leitura ↓</a>
+        <a class="btn btn--claro" href="Tutorial_Traducoes_Site_PROPESP_UEA.pdf" download>⬇ Baixar PDF</a>
+        <a class="btn btn--claro" href="https://proreitoria.uea.edu.br/propesp/wp-admin/admin.php?page=tm%2Fmenu%2Fmain.php&amp;tab=tasks" target="_blank" rel="noopener">Abrir as tarefas ↗</a>
+      </div>
+      <figure class="capa__fig"><img src="img/05-editor.jpg" alt="Editor de tradução do WPML"></figure>
+      <div class="capa__chamadas">
+        <div><b>106</b>tarefas de tradução abertas no WPML</div>
+        <div><b>53 páginas</b>do site, cada uma com 2 tarefas</div>
+        <div><b>EN + ES</b>inglês e espanhol a partir do português</div>
+        <div><b>1 clique</b>publica: “Salvar e completar”</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="folha">
+
+<!-- ======================= SUMÁRIO ======================= -->
+<section class="cap" id="sumario">
+  <div class="cap__abre"><span class="cap__num">00</span><span class="cap__rotulo">Nesta edição</span><h2>Sumário</h2></div>
+  <p class="cap__lead">As edições anteriores ensinavam a ler painéis. Esta ensina a escrever o site em outros idiomas. O exemplo usado do começo ao fim é a página <em>Apresentação Internacionalização</em>, traduzida para o inglês em 12/11/2026.</p>
+  <nav class="sumario">
+    <a href="#conceitos"><span class="n">1</span><b>Antes de começar</b><small>Tarefa, editor, tradução automática e o clique que publica</small></a>
+    <a href="#tarefa"><span class="n">2</span><b>Encontrando a tarefa</b><small>WPML › Traduções e o filtro por título</small></a>
+    <a href="#editor"><span class="n">3</span><b>Conhecendo o editor</b><small>Original à esquerda, tradução à direita</small></a>
+    <a href="#revisar"><span class="n">4</span><b>Revisando e corrigindo</b><small>Notas do tradutor, edição de trechos e checklist</small></a>
+    <a href="#publicar"><span class="n">5</span><b>Publicando e conferindo</b><small>Salvar e completar, status e página no ar</small></a>
+    <a href="#padroes"><span class="n">6</span><b>Padrões de tradução</b><small>Termos fixos em inglês e espanhol</small></a>
+    <a href="#duvidas"><span class="n">7</span><b>Dúvidas e cuidados</b><small>Rascunho, menu, atualizações</small></a>
+  </nav>
+  <div class="box box--info">
+    <h4>O que você precisa</h4>
+    <p>Login no painel WordPress da PROPESP com permissão de tradutor no WPML. Para cada página são duas tarefas: <strong>Português » Inglês</strong> e <strong>Português » Espanhol</strong>. Reserve de 10 a 15 minutos por idioma.</p>
+  </div>
+  <p class="so-web">Veja também os outros guias da série: <a href="https://willpine1992.github.io/TUTORIAL-PAINEIS-CONVENIOS-UEA/" target="_blank" rel="noopener">Painéis de Convênios</a>, <a href="https://willpine1992.github.io/TUTORIAL-PROSPECCAO-PARCERIAS-UEA/" target="_blank" rel="noopener">Prospecção de Parcerias</a> e <a href="https://willpine1992.github.io/TUTORIAL-MOBILIDADE-ACADEMICA-UEA/" target="_blank" rel="noopener">Mobilidade Acadêmica</a>.</p>
+</section>
+
+<!-- ======================= 1 CONCEITOS ======================= -->
+<section class="cap" id="conceitos">
+  <div class="cap__abre"><span class="cap__num">01</span><span class="cap__rotulo">Capítulo 1 <button class="copiar" data-copiar="conceitos">🔗 copiar link</button></span><h2>Antes de começar</h2></div>
+  <p class="cap__lead">O WPML é o plugin que deixa o site em três idiomas. Ele cria uma tarefa para cada página e cada idioma, e já entrega a tradução automática pronta. Quem traduz faz, na prática, um trabalho de revisor.</p>
+
+  <div class="comoler">
+    <h3>Cinco ideias para não se perder</h3>
+    <dl>
+      <dt>Tarefa</dt><dd>Uma página em um idioma de destino. “Apresentação Internacionalização” tem a tarefa <strong>41</strong> (inglês) e a <strong>42</strong> (espanhol).</dd>
+      <dt>Editor (ATE)</dt><dd>O <em>Advanced Translation Editor</em>, que abre em outro endereço (<code>e.ate.wpml.org</code>), com o original e a tradução lado a lado.</dd>
+      <dt>PTC</dt><dd>O tradutor automático do WPML. Quando o editor abre, ele já traduziu a página inteira e consumiu créditos de palavras.</dd>
+      <dt>Salvamento</dt><dd>O editor salva sozinho cada correção. Dá para fechar e voltar depois sem perder nada.</dd>
+      <dt>Salvar e completar</dt><dd>É o único botão que <strong>publica</strong>. A tradução recebe o status da página original: se a original está no ar, a tradução entra no ar.</dd>
+    </dl>
+  </div>
+
+  <div class="mapa">
+    <div class="no"><b>Lista de tarefas</b>WPML › Traduções</div>
+    <div class="seta">→</div>
+    <div class="no"><b>Editor</b>PTC já traduziu: revisar e corrigir</div>
+    <div class="seta">→</div>
+    <div class="no no--escuro"><b>Salvar e completar</b>página publicada em /en/ ou /es/</div>
+  </div>
+</section>
+
+<!-- ======================= 2 TAREFA ======================= -->
+<section class="cap" id="tarefa">
+  <div class="cap__abre"><span class="cap__num">02</span><span class="cap__rotulo">Capítulo 2 <button class="copiar" data-copiar="tarefa">🔗 copiar link</button></span><h2>Encontrando a tarefa</h2></div>
+  <p class="cap__lead">Todas as traduções pendentes ficam numa lista só. O filtro por título leva direto à página que você quer.</p>
+  <div class="abrir"><span>Lista de tarefas de tradução</span><a class="btn btn--pq" href="https://proreitoria.uea.edu.br/propesp/wp-admin/admin.php?page=tm%2Fmenu%2Fmain.php&amp;tab=tasks" target="_blank" rel="noopener">Abrir tarefas ↗</a><span class="url">proreitoria.uea.edu.br/propesp/wp-admin/admin.php?page=tm/menu/main.php&amp;tab=tasks</span></div>
+
+  <ol class="passos">
+    <li><b>Entre no painel do WordPress</b>Acesse <code>proreitoria.uea.edu.br/propesp/wp-admin</code> com seu usuário.</li>
+    <li><b>Clique em WPML › Traduções</b>No menu lateral. Fique na aba <em>Tarefas de tradução</em>.</li>
+    <li><b>Filtre pelo título</b>Clique na lupa ao lado de <em>Título</em> (marcador 1), digite parte do nome (aqui, <code>Apresentação</code>) e tecle Enter.</li>
+    <li><b>Escolha o idioma</b>Na coluna <em>Idiomas</em>, ache a linha <em>Português » Inglês</em> ou <em>Português » Espanhol</em>.</li>
+    <li><b>Clique em “Traduzir”</b>Na coluna <em>Ações</em>. O editor abre na mesma aba.</li>
+  </ol>
+
+  <figure class="shot">
+    <div class="shot__moldura"><div class="shot__barra"><i></i><i></i><i></i><small>wp-admin › WPML › Traduções › Tarefas de tradução</small></div>
+      <div class="shot__img"><img src="img/01-lista-tarefas.jpg" alt="Lista de tarefas de tradução" loading="lazy">
+        <b class="pin" style="left:24.3%;top:35.3%">1</b><b class="pin" style="left:60.5%;top:35.3%">2</b><b class="pin" style="left:75.6%;top:35.3%">3</b><b class="pin" style="left:88.5%;top:40.8%">4</b><b class="pin" style="left:88%;top:45.4%">5</b><b class="pin" style="left:3.5%;top:45.1%">6</b></div></div>
+    <ol class="legenda">
+      <li data-n="1"><span><strong>Busca por título</strong>. A lupa ao lado de <em>ID do trabalho</em> busca pelo número.</span></li>
+      <li data-n="2"><span><strong>Idiomas</strong>: de qual para qual idioma é a tarefa.</span></li>
+      <li data-n="3"><span><strong>Status</strong>: “Precisa de tradução” ou “Precisa de atualização”.</span></li>
+      <li data-n="4"><span><strong>Traduzir</strong>: abre o editor.</span></li>
+      <li data-n="5"><span><strong>Renunciar</strong>: cancela a tarefa. Não clique.</span></li>
+      <li data-n="6"><span><strong>Traduções</strong>, dentro do menu WPML.</span></li>
+    </ol>
+  </figure>
+
+  <div class="duas">
+    <figure class="shot">
+      <div class="shot__moldura"><div class="shot__barra"><i></i><i></i><i></i><small>Filtro: Título = Apresentação</small></div>
+        <div class="shot__img"><img src="img/02-filtro-titulo.jpg" alt="Lista filtrada por Apresentação" loading="lazy"><b class="pin" style="left:17%;top:32.8%">1</b><b class="pin" style="left:27.4%;top:32.8%">2</b></div></div>
+      <figcaption><strong>1</strong> filtro ativo · <strong>2</strong> Limpar todos os filtros.</figcaption>
+    </figure>
+    <figure class="shot">
+      <div class="shot__moldura"><div class="shot__barra"><i></i><i></i><i></i><small>Tarefas 41 e 42</small></div>
+        <div class="shot__img"><img src="img/03-tarefas-41-42.jpg" alt="Tarefas 41 e 42 na lista" loading="lazy"><b class="pin" style="left:15.9%;top:51.7%">1</b><b class="pin" style="left:15.9%;top:61.6%">2</b><b class="pin" style="left:88.5%;top:59.4%">3</b></div></div>
+      <figcaption><strong>1</strong> tarefa 42 (espanhol) · <strong>2</strong> tarefa 41 (inglês) · <strong>3</strong> Traduzir.</figcaption>
+    </figure>
+  </div>
+  <div class="box box--atencao">
+    <h4>Cuidado com “Renunciar”</h4>
+    <p>O link vermelho abaixo de “Traduzir” cancela a tarefa, e ela some da lista. Se clicar sem querer, peça ao administrador do WPML para reenviar a página para tradução.</p>
+  </div>
+</section>
+
+<!-- ======================= 3 EDITOR ======================= -->
+<section class="cap" id="editor">
+  <div class="cap__abre"><span class="cap__num">03</span><span class="cap__rotulo">Capítulo 3 <button class="copiar" data-copiar="editor">🔗 copiar link</button></span><h2>Conhecendo o editor</h2></div>
+  <p class="cap__lead">Ao abrir, o editor passa alguns segundos analisando o site. Depois mostra a página quebrada em trechos: o português à esquerda e a tradução, já pronta, à direita.</p>
+
+  <figure class="shot">
+    <div class="shot__moldura"><div class="shot__barra"><i></i><i></i><i></i><small>e.ate.wpml.org · carregando</small></div>
+      <div class="shot__img"><img src="img/04-carregando.jpg" alt="Editor carregando" loading="lazy"></div></div>
+    <figcaption><b>“Pesquisando seu site…”</b> O carregamento leva de 10 a 20 segundos. Espere a tela aparecer.</figcaption>
+  </figure>
+
+  <figure class="shot shot--alta">
+    <div class="shot__moldura"><div class="shot__barra"><i></i><i></i><i></i><small>e.ate.wpml.org · Apresentação Internacionalização → English</small></div>
+      <div class="shot__img"><img src="img/05-editor.jpg" alt="Editor de tradução aberto" loading="lazy">
+        <b class="pin" style="left:3%;top:5.4%">1</b><b class="pin" style="left:25.2%;top:3.4%">2</b><b class="pin" style="left:46.5%;top:7.9%">3</b><b class="pin" style="left:57.5%;top:3.4%">4</b>
+        <b class="pin" style="left:13.4%;top:15.9%">5</b><b class="pin" style="left:54%;top:15.9%">6</b><b class="pin" style="left:86.3%;top:14.7%">7</b><b class="pin" style="left:47.9%;top:31.6%">8</b>
+        <b class="pin" style="left:48.9%;top:93%">9</b><b class="pin" style="left:93.2%;top:95.4%">10</b></div></div>
+    <ol class="legenda">
+      <li data-n="1"><span><strong>Voltar</strong>: sai do editor sem completar. O que foi corrigido fica salvo.</span></li>
+      <li data-n="2"><span><strong>Traduzido com PTC</strong> e palavras usadas (aqui, 933).</span></li>
+      <li data-n="3"><span><strong>Mostrar o trabalho</strong>: notas do tradutor automático (capítulo 4).</span></li>
+      <li data-n="4"><span><strong>Desfazer tradução</strong>: apaga a tradução automática. Evite.</span></li>
+      <li data-n="5"><span><strong>Original</strong> em português, só leitura.</span></li>
+      <li data-n="6"><span><strong>Tradução</strong>: clique em qualquer trecho para editar.</span></li>
+      <li data-n="7"><span><strong>Não traduzido</strong>: conta trechos vazios. As setas pulam de um para o outro.</span></li>
+      <li data-n="8"><span><strong>Tipo do bloco</strong>: Title, Heading, Paragraph, List Item, Button…</span></li>
+      <li data-n="9"><span><strong>Progresso</strong> da tarefa.</span></li>
+      <li data-n="10"><span><strong>Salvar e completar</strong>: publica (capítulo 5).</span></li>
+    </ol>
+  </figure>
+  <div class="box box--dica">
+    <h4>Quanto custa abrir uma tarefa</h4>
+    <p>A tradução automática roda quando o editor abre e consome créditos de palavras do WPML. Abra só as tarefas que for revisar.</p>
+  </div>
+</section>
+
+<!-- ======================= 4 REVISAR ======================= -->
+<section class="cap" id="revisar">
+  <div class="cap__abre"><span class="cap__num">04</span><span class="cap__rotulo">Capítulo 4 <button class="copiar" data-copiar="revisar">🔗 copiar link</button></span><h2>Revisando e corrigindo</h2></div>
+  <p class="cap__lead">A tradução automática acerta quase tudo no corpo do texto. Os erros aparecem em títulos, nomes de cargos e termos institucionais. Comece pelo que o próprio PTC marcou.</p>
+
+  <h3>As notas do tradutor automático</h3>
+  <ol class="passos">
+    <li><b>Clique em “Mostrar o trabalho”</b>No topo do editor. Abre um painel à direita.</li>
+    <li><b>Leia as notas do tradutor</b>Explicam as escolhas de tom e o que ficou sem tradução de propósito (por exemplo, <em>CAPES Global</em>).</li>
+    <li><b>Confira as expressões sinalizadas</b>As marcadas como <em>precisa do seu julgamento</em> pedem decisão. <em>Ir para o segmento</em> leva ao trecho.</li>
+  </ol>
+  <div class="duas">
+    <figure class="shot">
+      <div class="shot__moldura"><div class="shot__barra"><i></i><i></i><i></i><small>Mostrar o trabalho · Notas</small></div>
+        <div class="shot__img"><img src="img/06-notas-ptc.jpg" alt="Notas do tradutor" loading="lazy"><b class="pin" style="left:89.1%;top:24%">1</b><b class="pin" style="left:84.5%;top:83%">2</b></div></div>
+      <figcaption><strong>1</strong> notas do tradutor · <strong>2</strong> expressões sinalizadas.</figcaption>
+    </figure>
+    <figure class="shot">
+      <div class="shot__moldura"><div class="shot__barra"><i></i><i></i><i></i><small>Expressões sinalizadas</small></div>
+        <div class="shot__img"><img src="img/07-expressoes.jpg" alt="Expressões sinalizadas" loading="lazy"><b class="pin" style="left:84.8%;top:43%">1</b><b class="pin" style="left:84.5%;top:61.9%">2</b><b class="pin" style="left:85.3%;top:79.3%">3</b></div></div>
+      <figcaption><strong>1</strong> resolvido por pesquisa · <strong>2</strong> ir para o segmento · <strong>3</strong> precisa do seu julgamento.</figcaption>
+    </figure>
+  </div>
+
+  <h3>Corrigindo um trecho</h3>
+  <ol class="passos">
+    <li><b>Clique no texto da direita</b>O trecho fica em modo de edição, com uma barra de ferramentas ao lado.</li>
+    <li><b>Reescreva</b>Aqui, “Presentation Internationalization” virou <strong>“About Internationalization”</strong>, mais natural em inglês.</li>
+    <li><b>Texto com negrito ou link: troque só a palavra</b>Dê dois cliques na palavra e digite por cima. Apagar o trecho inteiro remove a formatação.</li>
+    <li><b>Confira “Todas as alterações salvas”</b>O aviso verde aparece no topo depois de cada correção.</li>
+  </ol>
+  <div class="duas">
+    <figure class="shot">
+      <div class="shot__moldura"><div class="shot__barra"><i></i><i></i><i></i><small>Trecho em edição</small></div>
+        <div class="shot__img"><img src="img/08-segmento-aberto.jpg" alt="Segmento aberto para edição" loading="lazy"><b class="pin" style="left:57.5%;top:31.4%">1</b><b class="pin" style="left:77%;top:51%">2</b></div></div>
+      <figcaption><strong>1</strong> trecho aberto · <strong>2</strong> barra de ferramentas do trecho.</figcaption>
+    </figure>
+    <figure class="shot">
+      <div class="shot__moldura"><div class="shot__barra"><i></i><i></i><i></i><small>Título corrigido</small></div>
+        <div class="shot__img"><img src="img/09-titulo-corrigido.jpg" alt="Título corrigido" loading="lazy"><b class="pin" style="left:44.7%;top:31.4%">✓</b></div></div>
+      <figcaption><b>Depois:</b> “About Internationalization”.</figcaption>
+    </figure>
+  </div>
+  <figure class="shot">
+    <div class="shot__moldura"><div class="shot__barra"><i></i><i></i><i></i><small>Formatação preservada</small></div>
+      <div class="shot__img"><img src="img/10-negrito.jpg" alt="Negrito preservado em About" loading="lazy"><b class="pin" style="left:52.3%;top:76%">✓</b></div></div>
+    <figcaption><b>Negrito mantido:</b> só a palavra “Presentation” foi trocada por “About”.</figcaption>
+  </figure>
+
+  <h3>Checklist da revisão</h3>
+  <div class="tabela"><table>
+    <thead><tr><th>O que olhar</th><th>Regra</th><th>Exemplo</th></tr></thead>
+    <tbody>
+      <tr><td>Títulos de página</td><td>Evitar tradução literal</td><td>Apresentação → <em>About</em>, e não <em>Presentation</em></td></tr>
+      <tr><td>Nomes de pessoas</td><td>Nunca traduzir</td><td>Patricia Melchionna Albuquerque</td></tr>
+      <tr><td>Títulos acadêmicos</td><td>Adaptar</td><td>Profa. Dra. → <em>Prof. Dr.</em></td></tr>
+      <tr><td>Cargos</td><td>Usar o padrão do capítulo 6</td><td>Presidente → <em>Chair</em></td></tr>
+      <tr><td>Links e endereços</td><td>Iguais ao original</td><td>lattes.cnpq.br/…</td></tr>
+      <tr><td>Siglas oficiais</td><td>Manter</td><td>UEA, PROPESP, CAPES Global, PPGs</td></tr>
+      <tr><td>Botões</td><td>Texto curto e usual</td><td>Currículo Lattes → <em>Lattes CV</em></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ======================= 5 PUBLICAR ======================= -->
+<section class="cap" id="publicar">
+  <div class="cap__abre"><span class="cap__num">05</span><span class="cap__rotulo">Capítulo 5 <button class="copiar" data-copiar="publicar">🔗 copiar link</button></span><h2>Publicando e conferindo</h2></div>
+  <p class="cap__lead">Revisão pronta, um clique publica. Depois, vale conferir no WordPress e no próprio site se a página entrou no ar como esperado.</p>
+
+  <ol class="passos">
+    <li><b>Clique em “Salvar e completar”</b>Botão verde no canto inferior direito do editor. Você volta para a lista de tarefas, sem a tarefa concluída.</li>
+    <li><b>Abra Páginas › Inglês</b>No menu lateral, clique em <em>Páginas</em> e depois em <em>Inglês</em> na linha de idiomas (marcador 1).</li>
+    <li><b>Confira o status</b>A coluna <em>Data</em> mostra <strong>Publicado</strong> (marcador 3).</li>
+    <li><b>Veja no site</b>Passe o mouse sobre o título e clique em <em>Ver</em>. O endereço em inglês tem <code>/en/</code>, e o em espanhol, <code>/es/</code>.</li>
+  </ol>
+
+  <div class="box box--atencao">
+    <h4>É este clique que publica</h4>
+    <p>A tradução recebe o status da página original. Se ainda quiser que alguém revise, saia pelo botão <em>Voltar</em>: as correções ficam salvas e a tarefa continua na lista.</p>
+  </div>
+
+  <figure class="shot">
+    <div class="shot__moldura"><div class="shot__barra"><i></i><i></i><i></i><small>wp-admin › Páginas › Inglês</small></div>
+      <div class="shot__img"><img src="img/12-paginas-ingles.jpg" alt="Lista de páginas em inglês" loading="lazy"><b class="pin" style="left:12.1%;top:15.7%">1</b><b class="pin" style="left:18.7%;top:31.5%">2</b><b class="pin" style="left:88.9%;top:31.8%">3</b><b class="pin" style="left:44.3%;top:27%">4</b></div></div>
+    <ol class="legenda">
+      <li data-n="1"><span>Filtro de idioma <strong>Inglês</strong>.</span></li>
+      <li data-n="2"><span>Página traduzida: <strong>About Internationalization</strong>.</span></li>
+      <li data-n="3"><span>Status <strong>Publicado</strong>.</span></li>
+      <li data-n="4"><span>Bandeiras: o lápis abre a tradução da página em cada idioma.</span></li>
+    </ol>
+  </figure>
+
+  <figure class="shot">
+    <div class="shot__moldura"><div class="shot__barra"><i></i><i></i><i></i><small>proreitoria.uea.edu.br/propesp/en/index.php/about-internationalization/</small></div>
+      <div class="shot__img"><img src="img/13-pagina-no-ar.jpg" alt="Página publicada em inglês" loading="lazy"><b class="pin" style="left:33.5%;top:42.9%">1</b><b class="pin" style="left:36.3%;top:9.7%">2</b><b class="pin" style="left:69.3%;top:9.7%">3</b></div></div>
+    <ol class="legenda">
+      <li data-n="1"><span>Título corrigido, já no ar.</span></li>
+      <li data-n="2"><span><strong>MESTRADO</strong> continua em português no menu.</span></li>
+      <li data-n="3"><span><strong>INTERNACIONALIZATION</strong> com erro de grafia.</span></li>
+    </ol>
+  </figure>
+  <div class="box box--info">
+    <h4>O menu não faz parte da tarefa</h4>
+    <p>Os itens do menu do topo são traduzidos à parte, na tradução de menus do WPML. Os marcadores 2 e 3 mostram dois itens que ainda precisam de correção.</p>
+  </div>
+</section>
+
+<!-- ======================= 6 PADRÕES ======================= -->
+<section class="cap" id="padroes">
+  <div class="cap__abre"><span class="cap__num">06</span><span class="cap__rotulo">Capítulo 6 <button class="copiar" data-copiar="padroes">🔗 copiar link</button></span><h2>Padrões de tradução</h2></div>
+  <p class="cap__lead">O site é lido como um todo. Se uma página diz <em>Postgraduate</em> e a seguinte diz <em>Graduate</em>, o leitor estrangeiro estranha. Use sempre os termos abaixo.</p>
+
+  <div class="tabela"><table>
+    <thead><tr><th>Português</th><th>Inglês</th><th>Espanhol</th></tr></thead>
+    <tbody>
+      <tr><td>Pró-Reitoria de Pesquisa e Pós-Graduação (PROPESP)</td><td>Pro-Rectorate for Research and Postgraduate Studies (PROPESP)</td><td>Prorrectoría de Investigación y Posgrado (PROPESP)</td></tr>
+      <tr><td>Universidade do Estado do Amazonas (UEA)</td><td>State University of Amazonas (UEA)</td><td>Universidad del Estado de Amazonas (UEA)</td></tr>
+      <tr><td>Pós-Graduação</td><td>Postgraduate</td><td>Posgrado</td></tr>
+      <tr><td>Programas de Pós-Graduação (PPGs)</td><td>Postgraduate Programs (PPGs)</td><td>Programas de Posgrado (PPGs)</td></tr>
+      <tr><td>Comissão de Internacionalização da Pós-Graduação</td><td>Postgraduate Internationalization Committee</td><td>Comisión de Internacionalización del Posgrado</td></tr>
+      <tr><td>doutorado-sanduíche</td><td>sandwich doctoral program</td><td>doctorado sándwich</td></tr>
+      <tr><td>Portaria</td><td>Ordinance</td><td>Resolución</td></tr>
+      <tr><td>Currículo Lattes</td><td>Lattes CV</td><td>Currículum Lattes</td></tr>
+      <tr><td>Presidente / Vice-Presidente</td><td>Chair / Vice-Chair</td><td>Presidente / Vicepresidente</td></tr>
+      <tr><td>Membro Interno · Téc. Administrativo</td><td>Internal Member · Administrative Technician</td><td>Miembro Interno · Técnico Administrativo</td></tr>
+      <tr><td>Profa. Dra. / Prof. Dr.</td><td>Prof. Dr.</td><td>Prof.ª Dra. / Prof. Dr.</td></tr>
+      <tr><td>Iniciação Científica (ICT)</td><td>Undergraduate Research (ICT)</td><td>Iniciación Científica (ICT)</td></tr>
+      <tr><td>Apresentação (em título)</td><td>About …</td><td>Presentación / Acerca de …</td></tr>
+    </tbody>
+  </table></div>
+  <div class="box box--verde">
+    <h4>Não se traduzem</h4>
+    <p>Nomes de pessoas, endereços de links e nomes oficiais de programas e órgãos: <strong>CAPES Global, CNPq, FAPEAM, PROPOSDOC, PROVISIT, PROATEC, PROTLAB, CPPG, CPPI</strong>.</p>
+  </div>
+  <div class="box box--dica">
+    <h4>Espanhol: falsos amigos</h4>
+    <p>O PTC às vezes deixa passar falsos cognatos. Exemplo: “acompanhamento” (de ações) é <em>seguimiento</em>, e não <em>acompañamiento</em>.</p>
+  </div>
+
+  <h3>Roteiro rápido</h3>
+  <div class="receita"><span class="tempo">15 min</span><h4>Uma página, um idioma</h4>
+    <ol><li>WPML › Traduções › filtre pelo título › <em>Traduzir</em>.</li><li>Espere o editor carregar e clique em <em>Mostrar o trabalho</em>.</li><li>Resolva as expressões marcadas como “precisa do seu julgamento”.</li><li>Role a página inteira e aplique o checklist e os padrões.</li><li><em>Salvar e completar</em> e confira em Páginas e no site.</li></ol></div>
+  <div class="box box--verde so-web">
+    <h4>Checklist pessoal</h4>
+    <p>Os passos numerados têm uma caixinha “feito”, salva só neste navegador. <button class="btn btn--pq btn--claro" id="zerar" type="button">Limpar marcações</button></p>
+  </div>
+</section>
+
+<!-- ======================= 7 DÚVIDAS ======================= -->
+<section class="cap" id="duvidas">
+  <div class="cap__abre"><span class="cap__num">07</span><span class="cap__rotulo">Capítulo 7 <button class="copiar" data-copiar="duvidas">🔗 copiar link</button></span><h2>Dúvidas e cuidados</h2></div>
+  <p class="cap__lead">Situações que aparecem no dia a dia das traduções.</p>
+
+  <details class="faq" open><summary>Posso deixar uma tradução como rascunho?</summary><p>Sim. Corrija o que quiser e saia pelo botão <em>Voltar</em>, sem clicar em “Salvar e completar”. Tudo fica salvo no editor, e a página não vai ao ar. Para continuar, clique em <em>Traduzir</em> de novo na mesma tarefa.</p></details>
+  <details class="faq" open><summary>Publiquei e quero tirar do ar. O que faço?</summary><p>Em <em>Páginas</em>, filtre pelo idioma, clique em <em>Editar</em> na página traduzida e mude o status para <strong>Rascunho</strong>.</p></details>
+  <details class="faq" open><summary>O que é “Precisa de atualização”?</summary><p>A página original em português mudou depois que a tarefa foi criada. Ao abrir o editor, só os trechos novos ou alterados precisam de tradução.</p></details>
+  <details class="faq" open><summary>A tarefa sumiu da lista. Foi publicada?</summary><p>Tarefas concluídas saem da lista. Confira em <em>Páginas</em>, filtrando pelo idioma. Se a página não estiver lá, a tarefa pode ter sido cancelada em “Renunciar”.</p></details>
+  <details class="faq" open><summary>Corrigi um termo numa página. Ele muda nas outras?</summary><p>Não automaticamente. Para fixar um termo nas próximas traduções, cadastre-o na aba <em>Glossário</em>, ao lado de <em>Tarefas de tradução</em>.</p></details>
+
+  <h3>Glossário rápido</h3>
+  <dl class="glossario">
+    <dt>WPML</dt><dd>Plugin de tradução do WordPress usado no site da PROPESP.</dd>
+    <dt>ATE</dt><dd>Advanced Translation Editor, o editor de tradução do WPML.</dd>
+    <dt>PTC</dt><dd>Tradução automática do WPML que preenche a tarefa ao abrir o editor.</dd>
+    <dt>Segmento</dt><dd>Cada trecho da página no editor: título, parágrafo, item de lista, botão.</dd>
+    <dt>Tarefa (job)</dt><dd>Uma página em um idioma de destino, com número próprio (ID do trabalho).</dd>
+    <dt>/en/ · /es/</dt><dd>Prefixos dos endereços das versões em inglês e espanhol.</dd>
+  </dl>
+</section>
+
+<!-- ======================= CONTRACAPA ======================= -->
+<section class="contra" id="links">
+  <span class="cap__rotulo" style="color:#9fc9b6">Guarde esta página</span>
+  <h2>Todos os endereços</h2>
+  <div class="links">
+    <a href="https://proreitoria.uea.edu.br/propesp/wp-admin/admin.php?page=tm%2Fmenu%2Fmain.php&amp;tab=tasks" target="_blank" rel="noopener">WPML · Tarefas de tradução<small>proreitoria.uea.edu.br/propesp/wp-admin/admin.php?page=tm/menu/main.php&amp;tab=tasks</small></a>
+    <a href="https://proreitoria.uea.edu.br/propesp/wp-admin/edit.php?post_type=page&amp;lang=en" target="_blank" rel="noopener">Páginas em inglês<small>proreitoria.uea.edu.br/propesp/wp-admin/edit.php?post_type=page&amp;lang=en</small></a>
+    <a href="https://proreitoria.uea.edu.br/propesp/en/index.php/about-internationalization/" target="_blank" rel="noopener">Exemplo publicado<small>proreitoria.uea.edu.br/propesp/en/index.php/about-internationalization/</small></a>
+    <a href="https://willpine1992.github.io/TUTORIAL-PAINEIS-CONVENIOS-UEA/" target="_blank" rel="noopener">Guia dos Painéis de Convênios<small>willpine1992.github.io/TUTORIAL-PAINEIS-CONVENIOS-UEA/</small></a>
+    <a href="https://willpine1992.github.io/TUTORIAL-PROSPECCAO-PARCERIAS-UEA/" target="_blank" rel="noopener">Guia da Prospecção de Parcerias<small>willpine1992.github.io/TUTORIAL-PROSPECCAO-PARCERIAS-UEA/</small></a>
+    <a href="https://willpine1992.github.io/TUTORIAL-MOBILIDADE-ACADEMICA-UEA/" target="_blank" rel="noopener">Guia da Mobilidade Acadêmica<small>willpine1992.github.io/TUTORIAL-MOBILIDADE-ACADEMICA-UEA/</small></a>
+  </div>
+  <div class="baixar so-web">
+    <div><b>Leve o guia com você</b><span>Versão em PDF, pronta para imprimir ou enviar por e-mail.</span></div>
+    <a class="btn" href="Tutorial_Traducoes_Site_PROPESP_UEA.pdf" download>⬇ Baixar o PDF</a>
+  </div>
+  <p class="assinatura">Guia de Traduções do Site · PROPESP / UEA · Edição nº 4, novembro de 2026. Prints feitos em 12/11/2026 na tradução real da tarefa 41.<br>Autoria: William Pinheiro · <a href="http://lattes.cnpq.br/9111919283952655" target="_blank" rel="noopener">Currículo Lattes</a></p>
+</section>
+</main>
+
+<div class="lb" id="lb" role="dialog" aria-label="Imagem ampliada"><button class="lb__x" aria-label="Fechar">×</button><img alt=""></div>
+<a class="btn btn--pq fab-pdf" href="Tutorial_Traducoes_Site_PROPESP_UEA.pdf" download title="Baixar o guia em PDF">⬇ PDF</a>
+<button class="subir" id="subir" aria-label="Voltar ao topo">↑</button>
+
+<script>
+(function(){
+  // progresso + seção ativa
+  var bar=document.getElementById('progresso'), subir=document.getElementById('subir');
+  var links=[].slice.call(document.querySelectorAll('#nav a'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+  function onScroll(){
+    var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?h.scrollTop/max*100:0)+'%';
+    subir.classList.toggle('on',h.scrollTop>700);
+    var atual=-1;
+    secs.forEach(function(s,i){ if(s && s.getBoundingClientRect().top<140) atual=i; });
+    links.forEach(function(a,i){
+      var on=i===atual; if(on!==a.classList.contains('ativo')){a.classList.toggle('ativo',on); if(on){var nav=a.parentNode; nav.scrollLeft=a.offsetLeft-(nav.clientWidth-a.offsetWidth)/2;}}
+    });
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  subir.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+
+  // lightbox
+  var lb=document.getElementById('lb'), lbImg=lb.querySelector('img');
+  document.querySelectorAll('.shot__moldura').forEach(function(m){
+    m.addEventListener('click',function(){var i=m.querySelector('img'); lbImg.src=i.src; lbImg.alt=i.alt; lb.classList.add('aberto');});
+  });
+  lb.addEventListener('click',function(){lb.classList.remove('aberto')});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape') lb.classList.remove('aberto')});
+
+  // copiar link da seção
+  document.querySelectorAll('[data-copiar]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var url=location.href.split('#')[0]+'#'+b.dataset.copiar, txt=b.textContent;
+      function ok(){b.textContent='✓ copiado'; setTimeout(function(){b.textContent=txt},1600);}
+      if(navigator.clipboard) navigator.clipboard.writeText(url).then(ok,function(){prompt('Copie o link:',url)}); else prompt('Copie o link:',url);
+    });
+  });
+
+  // checklist dos passos (só neste navegador)
+  var KEY='guia-traducoes-uea-passos', marcados={};
+  try{marcados=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){}
+  function salvar(){try{localStorage.setItem(KEY,JSON.stringify(marcados));}catch(e){}}
+  document.querySelectorAll('.passos').forEach(function(ol,j){
+    var cap=(ol.closest('section')||{}).id||('l'+j);
+    [].slice.call(ol.children).forEach(function(li,i){
+      var id=cap+'-'+j+'-'+i, lab=document.createElement('label'), cb=document.createElement('input');
+      lab.className='marcar'; cb.type='checkbox'; cb.checked=!!marcados[id];
+      lab.appendChild(cb); lab.appendChild(document.createTextNode('feito'));
+      li.insertBefore(lab,li.firstChild); li.classList.toggle('feito',cb.checked);
+      cb.addEventListener('change',function(){li.classList.toggle('feito',cb.checked); if(cb.checked) marcados[id]=1; else delete marcados[id]; salvar();});
+    });
+  });
+  var z=document.getElementById('zerar');
+  if(z) z.addEventListener('click',function(){marcados={}; salvar(); document.querySelectorAll('.passos input').forEach(function(c){c.checked=false; c.closest('li').classList.remove('feito');});});
+})();
+</script>
+</body>
+</html>
